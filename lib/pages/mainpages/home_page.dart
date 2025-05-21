@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pro_counter/components/expense_tem.dart';
 import 'stastics.dart';
 // import '../../widgets/bottom_navigation_bar.dart';
 
@@ -141,39 +142,23 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
               const SizedBox(height: 16),
               // Expense List
-              _buildExpenseSection('Tuesday, 14', '₹1380', [
-                _ExpenseItem(
-                    icon: Icons.shopping_cart,
-                    title: 'Shop',
-                    subtitle: 'Buy new clothes',
-                    amount: '₹ 90'),
-                _ExpenseItem(
-                    icon: Icons.devices_other,
-                    title: 'Electronic',
-                    subtitle: 'Buy new iphone 14',
-                    amount: '-1290'),
-              ]),
-              _buildExpenseSection('Monday, 13', '-60', [
-                _ExpenseItem(
-                    icon: Icons.directions_bus,
-                    title: 'Transportation',
-                    subtitle: 'Trip to Malang',
-                    amount: '-60'),
-              ]),
+
+              ExpenseItem(
+                  icon: Icons.shopping_cart,
+                  title: 'Shop',
+                  subtitle: 'Buy new clothes',
+                  amount: '₹ 90'),
+              ExpenseItem(
+                  icon: Icons.devices_other,
+                  title: 'Electronic',
+                  subtitle: 'Buy new iphone 14',
+                  amount: '-1290'),
+
               const SizedBox(height: 80),
             ],
           ),
         ),
       ),
-      // Stastics page
-      const Stastics(),
-      // Placeholder for Add
-      Center(child: Icon(Icons.add_box, size: 64, color: Colors.grey)),
-      // Placeholder for Notifications
-      Center(
-          child: Icon(Icons.notifications_none, size: 64, color: Colors.grey)),
-      // Placeholder for Profile
-      Center(child: Icon(Icons.person_outline, size: 64, color: Colors.grey)),
     ];
 
     return Scaffold(
@@ -208,94 +193,6 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.notifications_none), label: 'Notifications'),
           BottomNavigationBarItem(
               icon: Icon(Icons.person_outline), label: 'Profile'),
-        ],
-      ),
-    );
-  }
-}
-
-Widget _buildExpenseSection(
-    String date, String total, List<_ExpenseItem> items) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(date,
-              style:
-                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-          Text('$total',
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.pink)),
-        ],
-      ),
-      const SizedBox(height: 8),
-      ...items.map((item) => item),
-      const SizedBox(height: 16),
-    ],
-  );
-}
-
-class _ExpenseItem extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final String amount;
-
-  const _ExpenseItem({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    required this.amount,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.07),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF8F6FF),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(icon, color: const Color(0xFF5B61B9)),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16)),
-                Text(subtitle,
-                    style: const TextStyle(color: Colors.grey, fontSize: 13)),
-              ],
-            ),
-          ),
-          Text(
-            '$amount',
-            style: const TextStyle(
-                color: Colors.pink, fontWeight: FontWeight.bold, fontSize: 16),
-          ),
         ],
       ),
     );
